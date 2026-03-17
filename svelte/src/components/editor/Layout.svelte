@@ -175,7 +175,8 @@
 	let allSelected = $state(),
 		visibleValues = $state([]),
 		rule = $state(),
-		rules = $state();
+		rules = $state(),
+		_fieldFilters = $state();
 
 	function runSignal(s) {
 		if (s & ACTION_FIELD_CHANGE) {
@@ -202,6 +203,7 @@
 				}
 				_format = nextField.format;
 				_predicate = nextField.predicate;
+				_fieldFilters = nextField.filters;
 
 				s = s | setState(ACTION_TYPE_CHANGE, nextField.type || "text");
 
@@ -211,7 +213,13 @@
 
 		if (s & ACTION_TYPE_CHANGE) {
 			// set list of filtering rules for current type
-			rules = getFilters(_type).map(a => ({
+			let typeFilters = getFilters(_type);
+			if (_fieldFilters) {
+				typeFilters = typeFilters.filter(
+					a => _fieldFilters.indexOf(a.id) !== -1
+				);
+			}
+			rules = typeFilters.map(a => ({
 				id: a.id,
 				label: _(a.label || a.id),
 			}));

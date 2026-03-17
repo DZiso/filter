@@ -71,6 +71,7 @@ export interface IField {
 	type: TType;
 	predicate?: TPredicate;
 	format?: string | ((value: AnyData) => string);
+	filters?: TFilterType[];
 }
 
 export interface IConfig {
