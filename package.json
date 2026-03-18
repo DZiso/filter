@@ -1,6 +1,14 @@
 {
-	"private": true,
-	"name": "@svar-ui/filter",
+	"name": "@svar-ui/svelte-filter",
+	"type": "module",
+	"svelte": "svelte/src/index.js",
+	"exports": {
+		".": {
+			"svelte": "./svelte/src/index.js",
+			"types": "./svelte/types/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
 	"workspaces": [
 		"svelte",
 		"store",
@@ -26,6 +34,14 @@
 		"watch:store": "cd store && shx rm -f ./dist/index.js && yarn watch",
 		"watch:tests": "run-p watch:deps start:tests",
 		"watch": "run-p watch:deps start:demos"
+	},
+	"dependencies": {
+		"@svar-ui/lib-dom": "0.12.0",
+		"@svar-ui/lib-state": "1.9.6",
+		"@svar-ui/filter-locales": "2.4.2",
+		"@svar-ui/filter-store": "2.4.2",
+		"@svar-ui/svelte-core": "2.4.1",
+		"@svar-ui/svelte-menu": "2.4.2"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "4.0.0",
